@@ -1,57 +1,89 @@
-#!/opt/homebrew/bin/python3
+#!/opt/homebrew/opt/python@3.10/bin/python3
 
-available_water = int(input('Write how many ml of water the coffee machine has:\n'))
-available_milk = int(input('Write how many ml of milk the coffee machine has:\n'))
-available_beans = int(input('Write how many grams of coffee beans the coffee machine has:\n'))
-
-wanted_coffee = int(input('Write how many cups of coffee you will need:\n'))
-
-need_water = 200
-need_milk = 50
-need_beans = 15
+water = 400
+milk = 540
+beans = 120
+cups = 9
+money = 550
 
 
-# check water
-def check_water(a_water, n_water):
-  return a_water // n_water
+# coffee machine says
+def coffee_machine():
+  global water, milk, beans, cups, money
+
+  print(f'''The coffee machine has:
+{water} ml of water
+{milk} ml of milk
+{beans} g of coffee beans
+{cups} disposable cups
+${money} of money
+''')
 
 
-# check milk
-def check_milk(a_milk, n_milk):
-  return a_milk // n_milk
+# function - buy
+def buy():
+  global water, milk, beans, cups, money
+
+  user_want = input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n')
+
+  if user_want == '1' and water >= 250 and beans >= 16 and money >= 4:
+    water -= 250
+    beans -= 16
+    money += 4
+
+  elif user_want == '2' and water >= 350 and milk >= 75 and beans >= 20 and money >= 7:
+    water -= 350
+    milk -= 75
+    beans -= 20
+    money += 7
+
+  elif user_want == '3' and water >= 200 and milk >= 100 and beans >= 12 and money >= 6:
+    water -= 200
+    milk -= 100
+    beans -= 12
+    money += 6
+
+  cups -= 1
 
 
-# check beans
-def check_beans(a_beans, n_beans):
-  return a_beans // n_beans
+# function - fill
+def fill():
+  global water, milk, beans, cups, money
+
+  add_water = int(input('Write how many ml of water you want to add:\n'))
+  add_milk = int(input("Write how many ml of milk you want to add:\n"))
+  add_beans = int(input("Write how many grams of coffee beans you want to add:\n"))
+  add_cups = int(input("Write how many cups of coffee you want to add:\n"))
+
+  water += add_water
+  milk += add_milk
+  beans += add_beans
+  cups += add_cups
 
 
-# check minimum
-def minimum_availability():
-  water = check_water(available_water, need_water)
-  milk = check_milk(available_milk, need_milk)
-  beans = check_beans(available_beans, need_beans)
-
-  return min(water, milk, beans)
+# function - take
+def take():
+  global water, milk, beans, cups, money
+  print(f'I gave you ${money}\n')
+  money = 0
 
 
-# compare with wanted
-def compare_and_answer(demand):
+# function - choose action according to user_input
+def user_action():
+  global water, milk, beans, cups, money
 
-  availability = minimum_availability()
+  user_input = input('Write action (buy, fill, take):\n')
 
-  # if same amount
-  if availability == demand:
-    print(f'Yes, I can make that amount of coffee')
-
-  # if more availble
-  elif availability > demand:
-    more = availability - demand
-    print(f'Yes, I can make that amount of coffee and even {more} more than that')
-
-  # if not availble
-  else:
-    print(f'No, I can make only {availability} cups of coffee')
+  if user_input == 'buy':
+    buy()
+  elif user_input == 'fill':
+    fill()
+  elif user_input == 'take':
+    take()
+  
+  coffee_machine()
 
 
-compare_and_answer(wanted_coffee)
+coffee_machine()
+
+user_action()
