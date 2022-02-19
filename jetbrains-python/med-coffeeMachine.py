@@ -8,23 +8,23 @@ money = 550
 
 
 # coffee machine says
-def coffee_machine():
-  global water, milk, beans, cups, money
+# def coffee_machine():
+#   global water, milk, beans, cups, money
 
-  print(f'''The coffee machine has:
-{water} ml of water
-{milk} ml of milk
-{beans} g of coffee beans
-{cups} disposable cups
-${money} of money
-''')
+#   print(f'''The coffee machine has:
+# {water} ml of water
+# {milk} ml of milk
+# {beans} g of coffee beans
+# {cups} disposable cups
+# ${money} of money
+# ''')
 
 
 # function - buy
 def buy():
   global water, milk, beans, cups, money
 
-  user_want = input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n')
+  user_want = input('\nWhat do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:\n''')
 
   if user_want == '1' and water >= 250 and beans >= 16 and money >= 4:
     water -= 250
@@ -43,7 +43,16 @@ def buy():
     beans -= 12
     money += 6
 
+  elif user_want == 'back':
+    print('')
+    return None
+
+  else:
+    print('Sorry, not enough water!\n')
+    return None
+
   cups -= 1
+  print('I have enough resources, making you a coffee!\n')
 
 
 # function - fill
@@ -64,26 +73,41 @@ def fill():
 # function - take
 def take():
   global water, milk, beans, cups, money
-  print(f'I gave you ${money}\n')
+  print(f'\nI gave you ${money}\n')
   money = 0
+
+
+# function - remaining
+def remaining():
+  global water, milk, beans, cups, money
+
+  print(f'''
+The coffee machine has:
+{water} ml of water
+{milk} ml of milk
+{beans} g of coffee beans
+{cups} disposable cups
+${money} of money
+''')
 
 
 # function - choose action according to user_input
 def user_action():
-  global water, milk, beans, cups, money
 
-  user_input = input('Write action (buy, fill, take):\n')
+  while True:
 
-  if user_input == 'buy':
-    buy()
-  elif user_input == 'fill':
-    fill()
-  elif user_input == 'take':
-    take()
+    user_input = input('Write action (buy, fill, take, remaining, exit):\n')
+
+    if user_input == 'buy':
+      buy()
+    elif user_input == 'fill':
+      fill()
+    elif user_input == 'take':
+      take()
+    elif user_input == 'remaining':
+      remaining()
+    elif user_input == 'exit':
+      break
   
-  coffee_machine()
-
-
-coffee_machine()
 
 user_action()
