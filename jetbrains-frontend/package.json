@@ -1,0 +1,14 @@
+{
+  "name": "jetbrains-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "coffee_machine.js",
+  "scripts": {
+    "test": "node coffee_machine.js"
+  },
+  "author": "geepum",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
