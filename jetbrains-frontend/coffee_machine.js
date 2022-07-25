@@ -1,120 +1,135 @@
 let input = require('readline-sync');
 
-const coffee = {
-  water: 400,
-  milk: 540,
-  beans: 120,
-  cups: 9,
-  money: 550
+const coffeeMachine = {
+  coffee: {
+    water: 400,
+    milk: 540,
+    beans: 120,
+    cups: 9,
+    money: 550
+  },
+  espresso: {
+    water: 250,
+    milk: 0,
+    beans: 16,
+    cups: 1,
+    money: -4
+  },
+  latte: {
+    water: 350,
+    milk: 75,
+    beans: 20,
+    cups: 1,
+    money: -7
+  },
+  cappuccino: {
+    water: 200,
+    milk: 100,
+    beans: 12,
+    cups: 1,
+    money: -6
+  }
 }
 
-const espresso = {
-  water: 250,
-  milk: 0,
-  beans: 16,
-  cups: 1,
-  money: -4
+function choices() {
+  let action = input.question('Write action (buy, fill, take, remaining, exit):\n');
+
+  return action;
 }
 
-const latte = {
-  water: 350,
-  milk: 75,
-  beans: 20,
-  cups: 1,
-  money: -7
-}
+function program(action) {
+  let choice = '';
+  switch (action) {
+    case '1':
+      choice = 'espresso';
+      break;
+    case '2':
+      choice = 'latte';
+      break;
+    case '3':
+      choice = 'cappuccino';
+  }
 
-const cappuccino = {
-  water: 200,
-  milk: 100,
-  beans: 12,
-  cups: 1,
-  money: -6
-}
+  let chosen = coffeeMachine[choice];
 
-const refresh = {
-  water: 0,
-  milk: 0,
-  beans: 0,
-  cups: 0,
-  money: 0,
-}
-
-function beginPhrase() {
-  console.log(`The coffee machine has:
-${coffee['water']} ml of water
-${coffee['milk']} ml of milk
-${coffee['beans']} g of coffee beans
-${coffee['cups']} disposable cups
-${coffee['money']} of money\n`);
-}
-
-function endPhrase() {
-  console.log(`\nThe coffee machine has:
-${refresh['water']} ml of water
-${refresh['milk']} ml of milk
-${refresh['beans']} g of coffee beans
-${refresh['cups']} disposable cups
-${refresh['money']} of money\n`); 
+  for (const item in chosen) {
+    if (coffeeMachine.coffee[item] < chosen[item]) {
+      console.log(`Sorry, not enough ${item}!\n`);
+      return '';
+    } else {
+      coffeeMachine.coffee[item] -= chosen[item];
+    }
+  }
+  console.log('I have enough resources, making you a coffee!\n');
 }
 
 function buy() {
-  let coffeeChoices = input.question('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n')
+  let action = input.question('\nWhat do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:\n');
 
-  switch (coffeeChoices) {
+  switch (action) {
     case '1':
-      for (const c in coffee) {
-        refresh[c] = coffee[c] - espresso[c];
-      }
+      program(action);
       break;
     case '2':
-      for (const c in coffee) {
-        refresh[c] = coffee[c] - latte[c];
-      } 
+      program(action);
       break;
     case '3':
-      for (const c in coffee) {
-        refresh[c] = coffee[c] - cappuccino[c];
-      }
+      program(action);
+      break;
+    case 'back':
+      program(action);
       break;
   }
 }
 
 function fill() {
-  let water = input.question('Write how many ml of water you want to add:\n')
-  let milk = input.question('Write how many ml of milk you want to add:\n')
-  let beans = input.question('Write how many ml of beans you want to add:\n')
-  let cups = input.question('Write how many ml of cups you want to add:\n')
+  let fillWater = input.question('\nWrite how many ml of water do you want to add:\n');
+  let fillMilk = input.question('Write how many ml of milk do you want to add:\n');
+  let fillBeans = input.question('Write how many grams of coffee beans do you want to add:\n');
+  let fillCups = input.question('Write how many disposable cups of coffee do you want to add:\n')
 
-  refresh['water'] = coffee['water'] + Number(water);
-  refresh['milk'] = coffee['milk'] + Number(milk);
-  refresh['beans'] = coffee['beans'] + Number(beans);
-  refresh['cups'] = coffee['cups'] + Number(cups);
-  refresh['money'] = coffee['money'];
+  coffeeMachine.coffee['water'] += Number(fillWater);
+  coffeeMachine.coffee['milk'] += Number(fillMilk);
+  coffeeMachine.coffee['beans'] += Number(fillBeans);
+  coffeeMachine.coffee['cups'] += Number(fillCups);
+  console.log('');
 }
 
 function take() {
-  console.log(`I gave you ${coffee['money']}`);
-  coffee['money'] = 0;
-  for (const c in coffee) {
-    refresh[c] = coffee[c];
+  console.log(`\nI gave you ${coffeeMachine.coffee['money']}\n`);
+  coffeeMachine.coffee['money'] = 0;
+}
+
+function remaining() {
+  console.log(`\nThe coffee machine has:
+${coffeeMachine.coffee['water']} ml of water
+${coffeeMachine.coffee['milk']} ml of milk
+${coffeeMachine.coffee['beans']} g of coffee beans
+${coffeeMachine.coffee['cups']} disposable cups
+${coffeeMachine.coffee['money']} of money\n`);
+}
+
+while (true) {
+  let choice = choices();
+
+  switch (choice) {
+    case 'buy':
+      buy();
+      break;
+
+    case 'fill':
+      fill();
+      break;
+
+    case 'take':
+      take();
+      break;
+
+    case 'remaining':
+      remaining();
+      break;
+
+    case 'exit':
+      return false;
   }
 }
-
-beginPhrase();
-
-let choices = input.question('Write action (buy, fill, take):');
-
-switch (choices) {
-  case 'buy':
-    buy();
-    break;
-  case 'fill':
-    fill();
-    break;
-  case 'take':
-    take();
-    break;
-}
-
-endPhrase();
