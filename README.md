@@ -2,12 +2,22 @@
 
 ## HTML - Input
 ```html
+<!-- telephone number -->
 <body>
   <form action="">
     <label for="telephone">Contact no.</label>
     <input type="tel" name="telephone" id="telephone" pattern="[0-9]{4}-[0-9]{2}-[0-9]{4}" placeholder="0101-32-1234"/>
   </form>
 </body>
+
+<!-- file -->
+<body>
+  <form action="">
+    <label for="file">choose a file</label>
+    <input type="file" name="file" id="file">
+  </form>
+</body>
+
 ```
 
 ## Javascript - Regex
