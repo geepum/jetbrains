@@ -1,8 +1,19 @@
 # Jetbrains
 
-## Regex
+## HTML - Input
+```html
+<body>
+  <form action="">
+    <label for="telephone">Contact no.</label>
+    <input type="tel" name="telephone" id="telephone" pattern="[0-9]{4}-[0-9]{2}-[0-9]{4}" placeholder="0101-32-1234"/>
+  </form>
+</body>
+```
+
+## Javascript - Regex
 
 ### Slice method
+```javascript
 let email = "hyperskill@gmail.com";
 email.slice(11, 16); // 'gmail'
 
@@ -14,8 +25,10 @@ str.slice(-8); // 'methods.'
 
 let newStr = "JavaScript";
 newStr.slice(-6, -1); // 'Scrip'
+```
 
 ### Split method
+```javascript
 let numbers = "123,456,789";
 
 // separator is ","
@@ -55,8 +68,10 @@ let text = "box, beatbox, boxer, boxing, postbox, box-sizing";
 let regexp = /\bbox/
 let splitText = text.split(regexp, 4);
 console.log(splitText); // [ '', ', beatbox, ', 'er, ', 'ing, postbox, ' ]
+```
 
 ### Replace method
+```javascript
 let text = "Javascript Javascript javascript";
 
 text.replace(/Javascript/, "JavaScript"); // 'JavaScript Javascript javascript'
@@ -64,4 +79,5 @@ text.replace(/Javascript/, "JavaScript"); // 'JavaScript Javascript javascript'
 text.replace(/Javascript/g, "JavaScript"); // 'JavaScript JavaScript javascript'
 
 text.replace(/Javascript/gi, "JavaScript"); // 'JavaScript JavaScript JavaScript'
+```
 
