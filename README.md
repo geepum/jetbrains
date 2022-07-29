@@ -10,14 +10,27 @@
   </form>
 </body>
 
-<!-- file -->
+<!-- file and multiple-->
+multiple applies only to file and email input types.
 <body>
   <form action="">
     <label for="file">choose a file</label>
-    <input type="file" name="file" id="file">
+    <input type="file" name="file" id="file" multiple>
   </form>
 </body>
 
+<!-- date -->
+<body>
+  <label for="date">Preferred Date:</label>
+  <input type="date" id="date" name="date">
+</body>
+
+<!-- download -->
+<a href="https://somesite.com/somefile.pdf" download> Somefile.pdf will be downloaded! </a>
+
+<!-- special links -->
+<a href="tel:+1234567890"> +1234567890 </a>
+<a href="mailto:example@mail.com"> example@mail.com </a>
 ```
 
 ## Javascript - Regex
