@@ -82,10 +82,6 @@ def calc():
             print(msg_2)
 
 
-def get_out():
-    return ''
-
-
 looping = True
 while looping:
     calculation = calc()
