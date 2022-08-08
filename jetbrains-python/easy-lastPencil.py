@@ -1,24 +1,29 @@
 #!/opt/homebrew/opt/python@3.10/bin/python3
 
-print('How many pencils would you like to use:')
+'''if pencils % 4 == 0, then 3
+if pencils % 4 == 3 then  2
+if pencils % 4 == 2 then  1'''
+
+
+
 while True:
     try:
-        num_or_not = int(input())
+        how_many_pencils = int(input('How many pencils would you like to use:\n'))
     
     except (ValueError, TypeError):
         print('The number of pencils should be numeric')
 
     else:
-        if num_or_not < 1:
+        if how_many_pencils < 1:
             print('The number of pencils should be positive')
         else:
             break
 
 
-print('Who will be the first (John, Jack):')
 while True:
-    who_first = input()
-
+    
+    who_first = input('Who will be the first (John, Jack):\n')
+    
     if who_first == 'John' or who_first == 'Jack':
         break
     else:
@@ -26,35 +31,85 @@ while True:
 
 
 pipe = '|'
-num = int(num_or_not)
-print(f'{pipe * num}')
-print(f'''{who_first}'s turn!''')
+remainder = int(how_many_pencils)
+player = 'John'
+bot = 'Jack'
+last_player = ''
+print(f'{pipe * remainder}')
 
-# looping = True
-while num > 0:
-    try:
-        left_over = int(input())
+def player_move(num):
+    while True:
+        try:
+            left_over = int(input())
 
-    except (TypeError, ValueError):
-        print("Possible values: '1', '2' or '3'")
-
-    else:
-        if left_over > 3 or left_over < 1:
+        except (TypeError, ValueError):
             print("Possible values: '1', '2' or '3'")
-            
-        elif left_over > num:
-            print('Too many pencils were taken')
+
         else:
-            num -= left_over
-            if who_first == 'John':
-                who_first = 'Jack'
+            if left_over > 3 or left_over < 1:
+                print("Possible values: '1', '2' or '3'")
+                
+            elif left_over > num:
+                print('Too many pencils were taken')
+        
             else:
-                who_first = 'John'
+                return left_over
 
-            if num == 0:
-                break
-            else:
-                print(f"{pipe * num}")
-                print(f"{who_first}'s turn!")
 
-print(f"{who_first} won!")
+def bot_move(num):
+    if num % 4 == 0:
+        return 3
+    elif num % 4 == 3:
+        return 2
+    elif num % 4 == 2:
+        return 1
+    elif num % 4 == 1:
+        return 1
+
+
+while remainder > 0:
+
+    if who_first == player:
+        print("John's turn!")
+
+        num1 = player_move(remainder)
+        remainder -= num1
+
+        if remainder != 0:
+            num2 = bot_move(remainder)
+
+            print(f'{pipe * remainder}')
+
+            print("Jack's turn:")
+            print(num2)
+            remainder -= num2
+            last_player = player
+            print(f'{pipe * remainder}')
+        else:
+            last_player = bot
+            break
+
+    elif who_first == bot:
+        print("Jack's turn!")
+
+        num_one = bot_move(remainder)
+        print(num_one)
+
+        remainder -= num_one
+
+        if remainder != 0:
+            print(f'{pipe * remainder}')
+
+            print("John's turn!")
+            num_two = player_move(remainder)
+
+            remainder -= num_two
+            print(f'{pipe * remainder}')
+
+            last_player = bot
+        else:
+            last_player = player
+            break
+    
+
+print(f'{last_player} won!')
