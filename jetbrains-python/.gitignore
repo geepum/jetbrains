@@ -1,2 +1,4 @@
 test.py
-*ipynb*
+*.ipynb_checkpoints
+*.txt
+*.csv
