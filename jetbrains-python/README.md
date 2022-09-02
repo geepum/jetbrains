@@ -101,5 +101,42 @@ def add_player(player, team=None):
     return team
 ```
 
+## lambda function
+
+invoking lambda function
+```python
+(lambda x, y: (x + y) % 2)(1, 5)
+# The output is 0
+
+func = lambda x, y: (x + y) % 2
+func(1, 10)
+# The output is 1
+
+lambda x: 'even' if x % 2 == 0 else 'odd'
+
+lambda x:
+    if x % 2 == 0:
+        return 'even'
+    else:
+        return 'odd'
+```
+
+when to use
+```python
+def create_function(n):
+    return lambda x n * x
+
+# Creating a function that doubles its argument
+doubler = create_function(2)
+
+# This function will triple its argument
+tripler = create_function(3)
+
+doubler(2)
+# Outputs 4
+
+tripler(2)
+# Outputs 6
+```
 
 
