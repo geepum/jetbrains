@@ -139,4 +139,68 @@ tripler(2)
 # Outputs 6
 ```
 
+## map()
+```python
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+def doubler(x):
+    return 2*x
+
+doubled_numbers = map(doubler, numbers)
+
+print(list(doubled_numbers))
+# Outputs [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+```
+
+```python
+doubled_numbers = map(lambda x: 2*x, numbers)
+
+print(list(doubled_numbers))
+# Outputs [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+```
+
+```python
+x_list = [1, 2, 3] 
+y_list = [4, 5, 6]
+z_list = [7, 8, 9] 
+
+s = list(map(lambda x, y, z: x + y + z, x_list, y_list, z_list))
+
+print(s)
+# The output is [12, 15, 18]
+```
+
+## filter
+```python
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+odd_numbers = filter(lambda x: x % 2, numbers)
+
+print(list(odd_numbers))
+# The output is [1, 3, 5, 7, 9]
+```
+
+```python
+letters = ['p', 'r', 'o', 'g', 'r', 'a', 'm', 'm', 'i', 'n', 'g', 'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e']
+
+def choose_vowels(letters):
+	vowels = ['a', 'e', 'i', 'u', 'o']
+	return list(filter(lambda x: x in vowels, letters))
+
+print(choose_vowels(letters))
+```
+
+```python
+def celsius_to_fahrenheit(c):
+    return ((c + 40) * 1.8) - 40
+
+
+daily_temp_c = [20.5, 19, 15, 25, 27, 30, 31, 29, 26, 21,
+                19, 25, 27.5, 28, 26, 29.5, 31, 27.5, 26, 29,
+                18, 17.5, 17, 16.5, 19, 20, 25, 26.5, 27, 28,
+                20.5, 19, 25, 27.5, 28, 26, 15, 25, 27, 28]
+
+daily_temp_f = list(map(celsius_to_fahrenheit, daily_temp_c))
+
+temp_over_80 = list(filter(lambda x: x > 80, daily_temp_f))
+```
