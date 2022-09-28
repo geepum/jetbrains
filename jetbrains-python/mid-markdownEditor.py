@@ -52,6 +52,26 @@ def italic():
     return f"*{text}*"
 
 
+def formatter(x):
+    while True:
+        rows = int(input('Number of rows: '))
+
+        if rows < 1:
+            print('The number of rows should be greater than zero')
+        else:
+            break
+
+    paragraph = ''
+    for row in range(rows):
+        text = input(f"Row #{row + 1}: ")
+        if x == 'unordered-list':
+            paragraph += '* ' + text + '\n'
+        else:
+            paragraph += f'{row + 1}. {text}' + '\n'
+
+    return paragraph
+    
+
 while True:
     init_q = input('Choose a formatter: ')
 
@@ -86,5 +106,7 @@ while True:
         elif init_q == 'italic':
             white_board += italic()
 
-
+        elif init_q == 'ordered-list' or init_q == 'unordered-list':
+            white_board += formatter(init_q)
+            
     print(white_board)
