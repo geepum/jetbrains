@@ -3,7 +3,8 @@
 lst = ['plain', 'bold', 'italic', 'header', 'link', 'inline-code', 'ordered-list', 'unordered-list', 'new-line', '!help']
 white_board = ''
 
-def help():
+
+def helper():
     print('''Available formatters: plain bold italic header link inline-code ordered-list unordered-list new-line
 Special commands: !help !done''')
 
@@ -70,12 +71,19 @@ def formatter(x):
             paragraph += f'{row + 1}. {text}' + '\n'
 
     return paragraph
-    
+
+
+def done(x):
+    with open('output.md', 'w', encoding='utf-8') as f:
+        for line in x:
+            f.write(line)
+
 
 while True:
     init_q = input('Choose a formatter: ')
 
     if init_q == '!done':
+        done(white_board)
         break
 
     else:
@@ -93,7 +101,7 @@ while True:
 
         elif init_q == 'plain':
             white_board += plain()
-        
+
         elif init_q == 'inline-code':
             white_board += inline_code()
 
