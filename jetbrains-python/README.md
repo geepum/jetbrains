@@ -204,3 +204,14 @@ daily_temp_f = list(map(celsius_to_fahrenheit, daily_temp_c))
 
 temp_over_80 = list(filter(lambda x: x > 80, daily_temp_f))
 ```
+
+## args
+```python
+def recipe(*args, sep=" or "):
+    return sep.join(args)
+
+
+print(recipe("meat", "fish"))               # meat or fish
+print(recipe("meat", "fish", sep=" and "))  # meat and fish
+```
+
