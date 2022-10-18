@@ -215,3 +215,43 @@ print(recipe("meat", "fish"))               # meat or fish
 print(recipe("meat", "fish", sep=" and "))  # meat and fish
 ```
 
+## os
+```python
+import os
+print('The current working directory is', os.getcwd())
+# The current working directory is /home/user/PycharmProjects/project
+os.chdir('/home/user')
+print('The current working directory is', os.getcwd())
+# The current working directory is /home/user
+
+os.mkdir('some_new_project') # create a single directory
+os.makedirs('course/students/year') # create nested directories
+print(os.listdir('course')) # with no parameter, it lists from current directory
+# ['student_list.txt', 'students', 'course_plan.txt']
+os.rename('course/student_list.txt', 'course/list_of_students.txt')
+# renames file or directory
+print(os.access('some_new_project', os.F_OK))  # if file exists
+print(os.access('course/list_of_students.txt', os.R_OK))  # read access
+print(os.access('course/list_of_students.txt', os.W_OK))  # write access
+print(os.access('course/list_of_students.txt', os.X_OK))  # execute access
+
+os.remove('course/course_plan.txt') # remove file
+# checking for existence
+os.access('course/course_plan.txt', os.F_OK) # False
+
+print(os.path.join('more_new_projects', 'more_new_plans')) # joins several given components
+# more_new_projects/more_new_plans
+print(os.path.split('/home/user/more_new_projects/more_new_plans')) # splits a pathname into a tuple (head, tail)
+# ('/home/user/more_new_projects', 'more_new_plans')
+print(os.path.dirname('/home/user/more_new_projects/more_new_plans')) # returns the directory of the path (head)
+# /home/user/more_new_projects
+print(os.path.basename('/home/user/more_new_projects/more_new_plans')) # returns the tail
+# more_new_plans
+print(os.path.isabs('/home/user/more_new_projects/more_new_plans')) # checks if the path is absolute path
+# True
+print(os.path.isdir('/home/user/more_new_projects/more_new_plans')) # checks if the given path refers to a directory
+# True
+print(os.path.isfile('/home/user/more_new_projects/more_new_plans')) # checks whether the path refers to a file
+# False
+
+```
