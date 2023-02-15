@@ -1,7 +1,7 @@
 msg_0 = "Enter an equation\n"
 msg_1 = "Do you even know what numbers are? Stay focused!"
 msg_2 = "Yes ... an interesting math operation. You've slept through all classes, haven't you?"
-
+msg_3 = "Yeah... division by zero. Smart move..."
 
 while True:
 
@@ -15,22 +15,30 @@ while True:
         print(msg_1)
 
     else:
-        if oper == '+':
-            result = x + y
-            break
+        if oper in ['+', '-', '*', '/']:
+            if oper == '+':
+                result = x + y
+                print(result)
+                break
 
-        elif oper == '-':
-            result = x - y
-            break
-        
-        elif oper == '*':
-            result = x * y
-            break
+            elif oper == '-':
+                result = x - y
+                print(result)
+                break
+            
+            elif oper == '*':
+                result = x * y
+                print(result)
+                break
 
-        elif oper == '/' and y != 0:
-            result = x / y
-            break
-        
+            elif oper == '/' and y != 0:
+                result = x / y
+                print(result)
+                break
+
+            else:
+                print(msg_3)
+            
         else:
             print(msg_2)
 
