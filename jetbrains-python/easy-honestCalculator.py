@@ -7,55 +7,49 @@ msg_5 = "Do you want to continue calculations? (y / n):\n"
 
 memory = 0
 
-def calc():
-    x, oper, y = input(msg_0).split()
-    return x, oper, y
-
 
 while True:
-    calc()
+    x, oper, y = input(msg_0).split()
 
     if x == 'M':
-        x = M
+        x = memory
+
     elif y == 'M':
-        y = M
+        y = memory
+    
     else:
         pass
 
     try:
         x = float(x)
         y = float(y)
-
-    except (ValueError, TypeError):
+        
+    except (TypeError, ValueError):
         print(msg_1)
-
+    
     else:
-        if oper in ['+', '-', '*', '/']:
+        if oper not in ['+', '-', '*', '/']:
+            print(msg_2)
+        elif oper == '/' and y == 0:
+            print(msg_3)
+        else:
             if oper == '+':
                 result = x + y
-
             elif oper == '-':
                 result = x - y
-            
             elif oper == '*':
                 result = x * y
-
             elif oper == '/' and y != 0:
                 result = x / y
 
-            
-
             print(result)
-            memory = result if input(msg_4) == 'y' else 0
 
-            if input(msg_5) == 'y':
-                M = memory
-                continue
-            else:
-                break
+            if input(msg_4) == 'y':
+                memory = result
             
-        elif oper == '/' and y == 0:
-            print(msg_3)
 
-        else:
-            print(msg_2)
+            if input(msg_5) == 'n':
+                break
+            else:
+                pass
+            
